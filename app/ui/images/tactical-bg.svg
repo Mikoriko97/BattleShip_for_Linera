@@ -1,0 +1,28 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Background -->
+  <rect width="200" height="200" fill="#050a0e"/>
+  
+  <!-- Subtle Grid -->
+  <defs>
+    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1b3b24" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#smallGrid)"/>
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#2f5e3c" stroke-width="1"/>
+    </pattern>
+  </defs>
+  
+  <rect width="200" height="200" fill="url(#grid)" />
+
+  <!-- Tactical Elements -->
+  <!-- Crosshairs -->
+  <path d="M 50 50 L 55 50 M 50 50 L 50 55" stroke="#00ff9d" stroke-width="1" opacity="0.6"/>
+  <path d="M 150 150 L 145 150 M 150 150 L 150 145" stroke="#00ff9d" stroke-width="1" opacity="0.6"/>
+  <path d="M 150 50 L 145 50 M 150 50 L 150 55" stroke="#00ff9d" stroke-width="1" opacity="0.6"/>
+  <path d="M 50 150 L 55 150 M 50 150 L 50 145" stroke="#00ff9d" stroke-width="1" opacity="0.6"/>
+
+  <!-- Random Data Points -->
+  <circle cx="100" cy="100" r="40" stroke="#00ff9d" stroke-width="0.5" fill="none" opacity="0.2" stroke-dasharray="5,5" />
+  <circle cx="100" cy="100" r="2" fill="#00ff9d" opacity="0.5"/>
+</svg>

@@ -1,0 +1,42 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "set PORT=5177 && npm run start:frontend",
+    "start:frontend:5177": "set PORT=5177 && npm run start:frontend",
+    "start:frontend": "node -e \"const http=require('http');const fs=require('fs');const path=require('path');const root=path.resolve(process.cwd());const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.wasm':'application/wasm','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.ico':'image/x-icon','.ttf':'font/ttf','.woff':'font/woff','.woff2':'font/woff2'};const port=Number(process.env.PORT)||5173;const server=http.createServer((req,res)=>{const setHeaders=()=>{res.setHeader('Cross-Origin-Opener-Policy','same-origin');res.setHeader('Cross-Origin-Embedder-Policy','require-corp');res.setHeader('Cross-Origin-Resource-Policy','same-origin');};setHeaders();try{const u=new URL(req.url,'http://localhost');let pathname=decodeURIComponent(u.pathname||'/');if(pathname==='/tests'||pathname==='/tests/'||pathname==='/'||pathname===''||pathname==='/app'||pathname==='/app/')pathname='/index.html';if(pathname.endsWith('/'))pathname+='index.html';pathname=pathname.replace(/^\\/+/,'' );if(pathname.startsWith('app/'))pathname=pathname.slice(4);const mapped=pathname.startsWith('node_modules/')?pathname:path.join('app',pathname);const filePath=path.resolve(path.join(root,mapped));if(!filePath.toLowerCase().startsWith(root.toLowerCase())){res.statusCode=403;res.setHeader('Content-Type','text/plain; charset=utf-8');res.end('Forbidden');return;}fs.stat(filePath,(err,st)=>{if(err||!st.isFile()){res.statusCode=404;res.setHeader('Content-Type','text/plain; charset=utf-8');res.end('Not found');return;}const ext=path.extname(filePath).toLowerCase();res.setHeader('Content-Type',mime[ext]||'application/octet-stream');fs.createReadStream(filePath).on('error',()=>{res.statusCode=500;res.setHeader('Content-Type','text/plain; charset=utf-8');res.end('Server error');}).pipe(res);});}catch(e){res.statusCode=500;res.setHeader('Content-Type','text/plain; charset=utf-8');res.end('Server error');}});server.listen(port,'0.0.0.0',()=>{console.log('Serving Battleship with COOP/COEP on http://localhost:'+port);});\"",
+    "test": "jest"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/app/**/*.test.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/linera-protocol/",
+      "<rootDir>/linera-skribble/",
+      "<rootDir>/scribbl/",
+      "<rootDir>/battleship/"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarkWool/battleship-js.git"
+  },
+  "keywords": [],
+  "author": "DarkWool",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DarkWool/battleship-js/issues"
+  },
+  "homepage": "https://github.com/DarkWool/battleship-js#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "jest": "^29.3.1"
+  },
+  "dependencies": {
+    "@linera/client": "^0.15.8"
+  }
+}
